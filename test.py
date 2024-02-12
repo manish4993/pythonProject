@@ -14,5 +14,9 @@ cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};\
                       UID='+username+';\
                       PWD='+password)
 
-df = pd.read_sql('SELECT TOP (100) * FROM DM_Foresight.VW_V4_RECTYPE_PIVOT_FIN', cnxn)
+df = pd.read_sql(
+    """
+    SELECT TOP (100) * FROM DM_Foresight.VW_V4_DATES_REBUILD WHERE TYPE = 'CURRENT PERIOD FLIP'
+    """
+    , cnxn)
 print(df)
